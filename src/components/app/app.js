@@ -39,7 +39,8 @@ class App extends Component {
                 }
             ],
             term: "",
-            filter: "all"
+            filter: "all",
+            languages: ['cs', 'uk', 'en']
         }
         this.maxValue = this.state.data.length + 1;
     }
@@ -92,7 +93,6 @@ class App extends Component {
     onUpdateFilter = (filter) => {
         this.setState({filter});
     }
-
     onFilterByProp = (items, prop) => {
         if (prop === "available" || prop === "favorite") {
             return items.filter(obj => obj[prop]);
@@ -102,11 +102,22 @@ class App extends Component {
     }
 
 
+    onUpdateLang = (languages) => {
+        this.setState({languages});
+    } 
+    onFilteredByLanguage = (items, langArr) => {
+        return items.filter((obj) => langArr.some(lang => lang === obj.lang))
+    }
+
+
     render() {
-        const {data, term, filter} = this.state;
+        const {data, term, filter, languages} = this.state;
         const booksQuantity = data.length;
         const actualReadingBooks = data.filter(bookObj => !bookObj.available).length;
-        const visibleData = this.onFilterByProp(this.searchBook(data, term), filter);
+        const filteredByTerm = this.searchBook(data, term)
+        const filteredByProp = this.onFilterByProp(filteredByTerm, filter); 
+        const visibleData = this.onFilteredByLanguage(filteredByProp, languages);
+
         return (
             <div className="app">
                 <AppInfo 
@@ -114,7 +125,7 @@ class App extends Component {
                     actualReadingBooks={actualReadingBooks}/>
                 <div className="search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter filter={filter} onUpdateFilter={this.onUpdateFilter}/>
+                    <AppFilter filter={filter} onUpdateFilter={this.onUpdateFilter} onUpdateLang={this.onUpdateLang}/>
                 </div>
                 <BooksList 
                     data={visibleData}
