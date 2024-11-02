@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './app-filter.css';
+import {Form} from 'react-bootstrap';
 
 class AppFilter extends Component {
     constructor(props) { // {filter, onUpdateFilter, onUpdateLang}
@@ -49,10 +50,17 @@ class AppFilter extends Component {
         })
         const langOptions = this.state.languages.map(({lang, on, label}) => {
             return (
-                <div className="form-check form-switch" key={lang}>
-                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name='language' value={lang} onChange={this.toggleCheckedStatus} checked={on}/>
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{label}</label>
-                </div>
+                <Form key={lang}>
+                    <Form.Check 
+                        type="switch"
+                        id="custom-switch"
+                        name='language'
+                        value={lang}
+                        label={label}
+                        onChange={this.toggleCheckedStatus.bind(this)} 
+                        checked={on}
+                    />
+               </Form>
             )
         })
         return (

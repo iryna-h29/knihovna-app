@@ -2,6 +2,7 @@ import { Component } from 'react';
 // import './book-add-form.css';
 import './book-add-form.scss';
 import { toBeInvalid } from '@testing-library/jest-dom/matchers';
+import {Form} from 'react-bootstrap';
 
 class BookAddForm extends Component {
     constructor(props) {
@@ -13,8 +14,13 @@ class BookAddForm extends Component {
             available: "true",
             favorite: false
         }
+        this.languagesData = [
+            {code: 'cs', label: 'čeština'},
+            {code: 'uk', label: 'українська'},
+            {code: 'en', label: 'english'},
+        ]
     }
-    onValueChange = (e) => {
+    onValueChange = (e) => {    
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -31,7 +37,14 @@ class BookAddForm extends Component {
         })  
     }
     render() {
-        const {title, author} = this.state;
+        const {title, author, lang} = this.state;
+        const langOptions = this.languagesData.map(({code, label}) => {
+            return (
+                <option value={code} lang={lang} key={code}>
+                    {label}
+                </option>
+            )
+        })
         return (
             <div className="app-add-form">
                 <h3>Přidání nové knihy</h3>
@@ -56,16 +69,14 @@ class BookAddForm extends Component {
                         onChange={this.onValueChange}
                         onInvalid={this.onInvalid}
                         required/>
-                    <select className="form-select form-select-sm" aria-label="Small select example" name='lang' required onChange={this.onValueChange}>
+                    <Form.Select as='select' size="sm" aria-label="Zvolit jazyk knihy" name='lang' value={lang} required onChange={this.onValueChange}>
                         <option value="">Jazyk knihy</option>
-                        <option value="cs">cs</option>
-                        <option value="uk">ukr</option>
-                        <option value="en">eng</option>
-                    </select>
-                    <select className="form-select form-select-sm" aria-label="Small select example" name='available' onChange={this.onValueChange}>
+                        {langOptions}
+                    </Form.Select>
+                    <Form.Select as='select' size="sm" aria-label="Zvolit dostupnost knihy" name='available' onChange={this.onValueChange}>
                         <option value='true'>dostupná</option>
                         <option value="">nedostupná</option>
-                    </select>
+                    </Form.Select>
                     <button type="submit"
                             className="btn btn-outline-light">Přidat</button>
                 </form>

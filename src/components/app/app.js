@@ -36,7 +36,15 @@ class App extends Component {
                     available: false,
                     lang: 'uk',
                     favorite: false
-                }
+                },
+                {
+                    id: 4,
+                    title: 'Čarodějky',
+                    author: ' Karin Krajčo Babinská',
+                    available: true,
+                    lang: 'cs',
+                    favorite: false
+                },
             ],
             term: "",
             filter: "all",
