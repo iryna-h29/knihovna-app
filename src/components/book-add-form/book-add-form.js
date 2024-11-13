@@ -1,8 +1,10 @@
 import { Component } from 'react';
 // import './book-add-form.css';
-import './book-add-form.scss';
 import { toBeInvalid } from '@testing-library/jest-dom/matchers';
-import {Form} from 'react-bootstrap';
+// import {Form , FloatingLabel} from 'react-bootstrap';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import './book-add-form.scss';
 
 class BookAddForm extends Component {
     constructor(props) {
@@ -49,36 +51,48 @@ class BookAddForm extends Component {
             <div className="app-add-form">
                 <h3>Přidání nové knihy</h3>
                 <form
-                    className="add-form d-flex"
+                    className="add-form container"
                     onSubmit={this.onSubmit}>
-                    <input type="text"
-                        className="form-control new-post-label"
-                        placeholder="Název knihy"
-                        name='title'
-                        value={title}
-                        minLength={3}
-                        onChange={this.onValueChange}
-                        onInvalid={this.onInvalid}
-                        required/>
-                    <input type="text"
-                        className="form-control new-post-label"
-                        placeholder="Autor knihy" 
-                        name='author'
-                        value={author}
-                        minLength={3}
-                        onChange={this.onValueChange}
-                        onInvalid={this.onInvalid}
-                        required/>
-                    <Form.Select as='select' size="sm" aria-label="Zvolit jazyk knihy" name='lang' value={lang} required onChange={this.onValueChange}>
-                        <option value="">Jazyk knihy</option>
-                        {langOptions}
-                    </Form.Select>
-                    <Form.Select as='select' size="sm" aria-label="Zvolit dostupnost knihy" name='available' onChange={this.onValueChange}>
-                        <option value='true'>dostupná</option>
-                        <option value="">nedostupná</option>
-                    </Form.Select>
-                    <button type="submit"
-                            className="btn btn-outline-light">Přidat</button>
+                    <div className="row">
+                        <input type="text"
+                            className="form-control new-post-label col"
+                            placeholder="Název knihy"
+                            name='title'
+                            value={title}
+                            minLength={3}
+                            onChange={this.onValueChange}
+                            onInvalid={this.onInvalid}
+                            required/>
+                        <input type="text"
+                            className="form-control new-post-label col"
+                            placeholder="Autor knihy" 
+                            name='author'
+                            value={author}
+                            minLength={3}
+                            onChange={this.onValueChange}
+                            onInvalid={this.onInvalid}
+                            required/>
+                        <Form.Select as='select' className='col' size="sm" aria-label="Zvolit jazyk knihy" name='lang' value={lang} required onChange={this.onValueChange}>
+                            <option value="">Jazyk knihy</option>
+                            {langOptions}
+                        </Form.Select>
+                        <Form.Select as='select' className='col' size="sm" aria-label="Zvolit dostupnost knihy" name='available' onChange={this.onValueChange}>
+                            <option value='true'>dostupná</option>
+                            <option value="">nedostupná</option>
+                        </Form.Select>
+                    </div>
+                    <div className="row mt-3">
+                        <FloatingLabel controlId="floatingTextarea2" label="Napište popis knihy" className='col-9 p-0 add-label-textarea'>
+                            <Form.Control
+                                as="textarea"
+                                placeholder="Napište popis knihy"
+                                className='add-form-textarea'
+                            />
+                        </FloatingLabel>
+                        <button type="submit" className="btn btn-outline-light col-2 add-form-btn">
+                            Přidat
+                        </button>
+                    </div>
                 </form>
             </div>
         )

@@ -12,3 +12,17 @@
     box-shadow: 15px 15px 30px rgba(0,0,0, .15);
     color: #fff;
 }
+.add-label-textarea {
+    color: rgb(87, 84, 84);
+    margin-right: 2em;
+    .add-form-textarea {
+        // display: inline-block;
+        height: 100px !important;
+        font-size: 14px;
+        /* margin-top: 10px; */
+    }
+}
+.add-form-btn {
+    display: inline-block;
+    height: 50px;
+}

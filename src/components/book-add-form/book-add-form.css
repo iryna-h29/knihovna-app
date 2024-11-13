@@ -15,3 +15,11 @@
     /* width: 350px; */
     margin-right: 20px;
 }
+.add-form-textarea {
+    height: 100px;
+    /* margin-top: 10px; */
+}
+.add-form-btn {
+    display: inline-block;
+    height: 20px;
+}
